@@ -35,3 +35,32 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+@font-face {
+  font-family: "SUSE";
+  src: url('assets/fonts/Suse/SUSE-Regular.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUSE";
+  src: url('assets/fonts/Suse/SUSE-Bold.ttf');
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "SUSE";
+  src: url('assets/fonts/Suse/SUSE-ExtraBold.ttf');
+  font-style: normal;
+  font-weight: 800;
+}
+
+* {
+  font-family: "SUSE", sans-serif;
+}
+
+ion-title {
+  font-family: "SUSE", sans-serif;
+  font-weight: bold;
+}

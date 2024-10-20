@@ -1,0 +1,80 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>Registrarse</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" color="light">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registrarse</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11" size-md="8" size-xl="6">
+
+        <!-- Vinculando el formulario al FormGroup -->
+        <form [formGroup]="datosForm" (ngSubmit)="registrarse()">
+          <br>
+          <ion-input
+            type="email"
+            placeholder="Email"
+            label="Email"
+            labelPlacement="floating"
+            mode="md"
+            fill="outline"
+            formControlName="email"
+            errorText="Ingresa un email válido">
+          </ion-input>
+          <br>
+
+          <ion-input
+            type="password"
+            placeholder="Contraseña"
+            label="Contraseña"
+            labelPlacement="floating"
+            mode="md"
+            fill="outline"
+            formControlName="password"
+            errorText="Debe tener mínimo 6 caracteres">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+          <br>
+
+          <ion-input
+            type="password"
+            placeholder="Repite la contraseña"
+            label="Confirmar Contraseña"
+            labelPlacement="floating"
+            mode="md"
+            fill="outline"
+            formControlName="passwordConfirm"
+            errorText="Las contraseñas deben coincidir">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+          <br>
+
+          <div class="ion-text-center">
+            <ion-button type="submit" shape="round" [disabled]="!datosForm.valid">
+              Registrarse
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="ion-text-center">
+    <p> ¿Ya tienes un usuario?</p>
+    <ion-button [routerLink]="['/login']" color="medium" shape="round">
+      Ingresar
+    </ion-button>
+  </div>
+</ion-content>
+
+
