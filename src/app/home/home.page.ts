@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { NavController } from '@ionic/angular';
+import { InteractionService } from '../services/interaction.service';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +12,24 @@ export class HomePage {
 
   navController = inject(NavController);
   loginSrv = inject(LoginService);
+  interactionSrv = inject(InteractionService);
   constructor() {}
 
   ngOnInit() {
   }
 
-  public cerrarSesion() {
-    this.loginSrv.logout().then(() => {
-      console.log('Sesión cerrada');
-      // Redirigir al usuario a la página de login
-      this.navController.navigateRoot('/login'); // Asegúrate de que la ruta coincida con la configuración de tu router
-    }).catch(error => {
-      console.error('Error al cerrar sesión:', error);
-    });
+  async cerrarSesion() {
+    const confirmacion = await this.interactionSrv.presentAlert(
+      'Cerrar Sesión',
+      '¿Estás seguro de que deseas cerrar la sesión?',
+      'Cancelar',
+      'Cerrar Sesión'
+    );
+
+    if (confirmacion) {
+      await this.loginSrv.logout();  // Cerrar sesión
+      await this.interactionSrv.showToast('Sesión cerrada correctamente');
+      this.navController.navigateRoot('/login');  // Redirigir a la página de login
+    }
   }
 }
