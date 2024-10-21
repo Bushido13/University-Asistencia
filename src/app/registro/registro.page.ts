@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { InteractionService } from '../services/interaction.service';
 import { NavController } from '@ionic/angular';
+import { PerfilService } from '../services/perfil.service';
 
 @Component({
   selector: 'app-registro',
@@ -15,13 +16,18 @@ export class RegistroPage implements OnInit {
   loginSrv = inject(LoginService);
   interactionSrv = inject(InteractionService);
   navCtrl = inject(NavController);
+  perfilSrv = inject(PerfilService);
 
   constructor(private fb: FormBuilder) {
     // Inicializar el FormGroup en el constructor
     this.datosForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],  // Validar email
       password: ['', [Validators.required, Validators.minLength(6)]],  // Validar password
-      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]]  // Confirmación de contraseña
+      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],  // Confirmación de contraseña
+      nombreAlumno: ['', Validators.required],  // Validar nombre
+      modalidad: ['', Validators.required],  // Validar modalidad (vespertino o diurno)
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],  // Validar teléfono
+      carrera: ['', Validators.required],
     });
   }
 
@@ -29,9 +35,14 @@ export class RegistroPage implements OnInit {
 
   async registrarse() {
     if (this.datosForm.valid) {
-      const { email, password } = this.datosForm.value;
+      const { email, password, nombreAlumno, modalidad, telefono, carrera } = this.datosForm.value;
 
-      // Mostrar alerta de confirmación
+      // Validar que no haya campos undefined
+      if (!nombreAlumno || !modalidad || !telefono || !carrera) {
+        console.error('Faltan datos del perfil');
+        return await this.interactionSrv.showToast('Por favor completa todos los campos');
+      }
+
       const confirmacion = await this.interactionSrv.presentAlert(
         'Confirmar Registro',
         '¿Estás seguro de que deseas crear esta cuenta?',
@@ -39,19 +50,27 @@ export class RegistroPage implements OnInit {
         'Registrar'
       );
 
-      if (confirmacion) {  // Si el usuario confirma
+      if (confirmacion) {
         try {
-          await this.interactionSrv.showLoading('Registrando usuario...');  // Mostrar loading
-          await this.loginSrv.register(email, password);  // Llamada al servicio de registro
-          await this.interactionSrv.dismissLoading();  // Ocultar loading
+          await this.interactionSrv.showLoading('Registrando usuario...');
+          const usuarioRegistrado = await this.loginSrv.register(email, password);
 
-          // Mostrar mensaje toast de éxito
+          // Guarda los datos adicionales en el perfil
+          await this.perfilSrv.saveProfileData({
+            nombreAlumno,
+            modalidad,
+            telefono,
+
+            carrera,
+
+
+          });
+
+          await this.interactionSrv.dismissLoading();
           await this.interactionSrv.showToast('Usuario registrado exitosamente');
-
-          // Redirigir al home
-          this.navCtrl.navigateRoot('/home');  // Cambiar a la página de inicio
+          this.navCtrl.navigateRoot('/home');
         } catch (error) {
-          await this.interactionSrv.dismissLoading();  // Ocultar loading en caso de error
+          await this.interactionSrv.dismissLoading();
           console.error('Error en el registro:', error);
           await this.interactionSrv.showToast('Error en el registro, inténtelo de nuevo');
         }
@@ -59,4 +78,3 @@ export class RegistroPage implements OnInit {
     }
   }
 }
-

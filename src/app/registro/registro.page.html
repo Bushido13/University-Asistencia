@@ -59,6 +59,49 @@
           </ion-input>
           <br>
 
+          <!-- Nombre del Alumno -->
+  <ion-input
+    type="text"
+    placeholder="Nombre del Alumno"
+    label="Nombre Alumno"
+    labelPlacement="floating"
+    mode="md"
+    fill="outline"
+    formControlName="nombreAlumno">
+  </ion-input>
+  <br>
+
+  <!-- Modalidad (vespertino o diurno) -->
+  <ion-select placeholder="Modalidad" formControlName="modalidad">
+    <ion-select-option value="vespertino">Vespertino</ion-select-option>
+    <ion-select-option value="diurno">Diurno</ion-select-option>
+  </ion-select>
+  <br>
+
+  <!-- Teléfono -->
+  <ion-input
+    type="tel"
+    placeholder="Teléfono"
+    label="Teléfono"
+    labelPlacement="floating"
+    mode="md"
+    fill="outline"
+    formControlName="telefono">
+  </ion-input>
+  <br>
+
+  <!-- Carrera -->
+  <ion-input
+    type="text"
+    placeholder="Carrera"
+    label="Carrera"
+    labelPlacement="floating"
+    mode="md"
+    fill="outline"
+    formControlName="carrera">
+  </ion-input>
+  <br>
+
           <div class="ion-text-center">
             <ion-button type="submit" shape="round" [disabled]="!datosForm.valid">
               Registrarse

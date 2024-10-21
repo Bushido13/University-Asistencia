@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseAuthentication, User } from '@capacitor-firebase/authentication';
+import { FirebaseFirestore } from '@capacitor-firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -27,6 +28,23 @@ export class LoginService {
       // cuando llamemos este metodo, firebase ya estará cargado y el guard lo sabrá
       this.cargarFirebase();
     });
+  }
+
+  public async guardarDatosUsuario(datos: { nombreAlumno: string, modalidad: string, telefono: string, carrera: string }) {
+    const user = this.usuario;  // Obtener el usuario actual
+    if (user) {
+      await FirebaseFirestore.setDocument({
+        reference: `users/${user.uid}`,
+        data: {
+          email: user.email,
+          nombreAlumno: datos.nombreAlumno,
+          modalidad: datos.modalidad,
+          telefono: datos.telefono,
+          carrera: datos.carrera
+        },
+        merge: true
+      });
+    }
   }
 
   public get logeado() {
