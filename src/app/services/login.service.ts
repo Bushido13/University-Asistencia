@@ -83,4 +83,21 @@ export class LoginService {
     this.nombreUsuario = ''; // Limpia el nombre de usuario
     console.log('Usuario cerrado de sesión');
   }
+
+  public async eliminarCuenta() {
+    const user = this.usuario;
+    if (user) {
+      try {
+        await FirebaseAuthentication.deleteUser();  // Eliminar la cuenta de Firebase Auth
+        await FirebaseFirestore.deleteDocument({
+          reference: `profiles/${user.uid}`,  // Eliminar los datos del Firestore
+        });
+        this.usuarioActual.next(undefined); // Limpiar el usuario actual
+        console.log('Cuenta eliminada correctamente');
+      } catch (error) {
+        console.error('Error al eliminar la cuenta:', error);
+        throw error;
+      }
+    }
+  }
 }

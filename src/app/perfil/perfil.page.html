@@ -2,9 +2,9 @@
   <ion-toolbar>
     <ion-title>Perfil</ion-title>
     <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
+     <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -16,92 +16,59 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
-    <ion-list-header mode="ios">
-      <ion-label><i>Bienvenido</i></ion-label>
-    </ion-list-header>
+  <form [formGroup]="perfilForm">
+    <ion-list>
+      <ion-list-header mode="ios">
+        <ion-label><i>Bienvenido</i></ion-label>
+      </ion-list-header>
 
-    <ion-item lines="none">
-      <ion-avatar slot="start">
-        <img src="path/to/profile-image.jpg" />
-      </ion-avatar>
-      <ion-label>
-        Nombre de Usuario
-        <p>usuarioexample.com</p>
-      </ion-label>
-    </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          <ion-icon name="person-circle-outline"></ion-icon>
+          Nombre de Usuario
+          <ion-input formControlName="nombreAlumno" placeholder="Nombre"></ion-input>
+        </ion-label>
+      </ion-item>
 
-    <div class="ion-text-end">
-      <ion-chip color="success" mode="ios">
-        <ion-icon name="checkmark-circle"></ion-icon>
-        <ion-label>correo verificado</ion-label>
-      </ion-chip>
-    </div>
+      <ion-item lines="none">
+        <ion-label>
+        <ion-icon name="mail-outline"></ion-icon>
+          Correo
+          <p>{{ loginService.usuario?.email }}</p>
+        </ion-label>
+      </ion-item>
 
-    <ion-grid fixed class="ion-no-padding">
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="12" size-md="8">
-          <ion-list inset>
-            <ion-item button>
-              <ion-icon slot="start" name="mail"></ion-icon>
-              <ion-label>Editar correo</ion-label>
-            </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="image"></ion-icon>
-              <ion-label>Editar foto de perfil</ion-label>
-            </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="person"></ion-icon>
-              <ion-label>Editar nombre de perfil</ion-label>
-            </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="finger-print"></ion-icon>
-              <ion-label>Establecer contraseña</ion-label>
-            </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="log-out"></ion-icon>
-              <ion-label>Cerrar sesión</ion-label>
-            </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="trash" color="danger"></ion-icon>
-              <ion-label>Eliminar cuenta</ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-list>
+      <ion-item lines="none">
+        <ion-label>
+        <ion-icon name="call-outline"></ion-icon>
+          Teléfono
+          <ion-input formControlName="telefono" placeholder="Teléfono"></ion-input>
+        </ion-label>
+      </ion-item>
 
-  <ion-modal>
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Título del Modal</ion-title>
-          <ion-buttons slot="end">
-            <ion-button>
-              <ion-icon slot="icon-only" name="close"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
+      <ion-item lines="none">
+        <ion-label>
+        <ion-icon name="library-outline"></ion-icon>
+          Carrera
+          <ion-input formControlName="carrera" placeholder="Carrera"></ion-input>
+        </ion-label>
+      </ion-item>
 
-      <ion-content class="ion-padding">
-        <ion-item lines="none">
-          <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
-          <ion-label>
-            Ingresa el nuevo correo, te enviaremos un enlace de verificación para que el cambio sea exitoso.
-          </ion-label>
-        </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+        <ion-icon name="star-outline"></ion-icon>
+          Modalidad
+          <ion-input formControlName="modalidad" placeholder="Modalidad"></ion-input>
+        </ion-label>
+      </ion-item>
 
-        <ion-input type="email" placeholder="Nuevo correo" label="Nuevo correo" labelPlacement="floating" fill="outline" mode="md"></ion-input>
+      <ion-button shape="round" [disabled]="perfilForm.invalid" (click)="actualizarPerfil()">
+        Actualizar Perfil
+      </ion-button>
 
-        <div class="ion-text-center">
-          <ion-button shape="round">Actualizar</ion-button>
-        </div>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-
-  <br>
-  <br>
+      <ion-button shape="round" color="danger" (click)="confirmarEliminacionCuenta()">
+        Eliminar Cuenta
+      </ion-button>
+    </ion-list>
+  </form>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { NavController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { InteractionService } from '../services/interaction.service';
 import { PerfilService } from '../services/perfil.service';
 
@@ -16,10 +16,15 @@ export class HomePage {
   interactionSrv = inject(InteractionService);
   nombreAlumno: string | null = null;
   perfilSrv = inject(PerfilService);
-  constructor() {}
+  constructor(private menu: MenuController) {}
 
   ngOnInit() {
     this.cargarDatosPerfil();
+    this.menu.close();
+  }
+
+  ionViewWillEnter() {
+    this.menu.close(); // Cierra el menú al entrar en la vista
   }
 
   async cargarDatosPerfil() {
