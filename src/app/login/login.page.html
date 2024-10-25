@@ -46,61 +46,63 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6">
-        <ion-list inset>
-          <ion-item detail button lines="none" color="light">
-            <ion-label>¿Olvidaste tu contraseña?</ion-label>
-            <ion-buttons slot="end">
-              <ion-button color="secondary" id="modal-recuperar-password">
-                Recuperar
-              </ion-button>
-            </ion-buttons>
-          </ion-item>
-          <br>
-          <ion-item [routerLink]="['/registro']" detail button lines="none" color="light">
-            <ion-label>¿No tienes un usuario?</ion-label>
-            <ion-buttons slot="end">
-              <ion-button   color="secondary">
-                Regístrate
-              </ion-button>
-            </ion-buttons>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
+<ion-row class="ion-justify-content-center">
+  <ion-col size="12" size-md="6">
+    <ion-list inset>
+      <!-- Opción para Recuperar Contraseña -->
+      <ion-item lines="none" color="light">
+        <ion-label>¿Olvidaste tu contraseña?</ion-label>
+        <ion-buttons slot="end">
+          <ion-button color="secondary" id="modal-recuperar-password">
+            Recuperar
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+      <br>
+      <!-- Opción para Registrarse -->
+      <ion-item lines="none" color="light">
+        <ion-label>¿No tienes un usuario?</ion-label>
+        <ion-buttons slot="end">
+          <ion-button color="secondary" [routerLink]="['/registro']">
+            Regístrate
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
 
-    <ion-modal trigger="modal-recuperar-password" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.75]">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Reestablecer contraseña</ion-title>
-            <ion-buttons slot="end">
-              <ion-button>
-                <ion-icon slot="icon-only" name="close"></ion-icon>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <ion-item lines="none">
-            <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              Te enviaremos un email a tu correo para que puedas reestablecer tu contraseña
-            </ion-label>
-          </ion-item>
-          <br>
-          <ion-input type="email" label="Ingresa tu email"
-            placeholder="Email" fill="outline" mode="md" labelPlacement="floating" errorText="Ingresa un email válido"></ion-input>
-          <br>
-          <div class="ion-text-center">
-            <ion-button shape="round">
-              Enviar correo
-            </ion-button>
-          </div>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
+<ion-modal id="modal-recuperar-password" trigger="modal-recuperar-password" [initialBreakpoint]="0.75" [breakpoints]="[0, 0.75]">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Reestablecer contraseña</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarModal()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item lines="none">
+        <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          Te enviaremos un email a tu correo para que puedas reestablecer tu contraseña
+        </ion-label>
+      </ion-item>
+      <br>
+      <ion-input [(ngModel)]="email" type="email" label="Ingresa tu email"
+        placeholder="Email" fill="outline" mode="md" labelPlacement="floating"></ion-input>
+      <br>
+      <div class="ion-text-center">
+        <ion-button shape="round" (click)="enviarCorreo()">
+          Enviar correo
+        </ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
 
 
   </ion-grid>

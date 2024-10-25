@@ -1,20 +1,19 @@
-<ion-header translucent="true">
-  <ion-toolbar>
-    <ion-title>Perfil</ion-title>
-    <ion-buttons slot="start">
-     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content fullscreen="true" color="light">
-  <ion-header collapse="condense">
+
+<ion-content id="main-content" fullscreen="true" color="light">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Perfil</ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button> <!-- Botón de retroceso -->
+      </ion-buttons>
+      <ion-title>Perfil</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+
 
   <form [formGroup]="perfilForm">
     <ion-list>
@@ -32,7 +31,7 @@
 
       <ion-item lines="none">
         <ion-label>
-        <ion-icon name="mail-outline"></ion-icon>
+          <ion-icon name="mail-outline"></ion-icon>
           Correo
           <p>{{ loginService.usuario?.email }}</p>
         </ion-label>
@@ -40,7 +39,7 @@
 
       <ion-item lines="none">
         <ion-label>
-        <ion-icon name="call-outline"></ion-icon>
+          <ion-icon name="call-outline"></ion-icon>
           Teléfono
           <ion-input formControlName="telefono" placeholder="Teléfono"></ion-input>
         </ion-label>
@@ -48,7 +47,7 @@
 
       <ion-item lines="none">
         <ion-label>
-        <ion-icon name="library-outline"></ion-icon>
+          <ion-icon name="library-outline"></ion-icon>
           Carrera
           <ion-input formControlName="carrera" placeholder="Carrera"></ion-input>
         </ion-label>
@@ -56,7 +55,7 @@
 
       <ion-item lines="none">
         <ion-label>
-        <ion-icon name="star-outline"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
           Modalidad
           <ion-input formControlName="modalidad" placeholder="Modalidad"></ion-input>
         </ion-label>

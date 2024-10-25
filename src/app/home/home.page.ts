@@ -23,7 +23,16 @@ export class HomePage {
     this.menu.close();
   }
 
+  openMenu() {
+    this.menu.isOpen().then((isOpen) => {
+      if (!isOpen) {
+        this.menu.open();
+      }
+    });
+  }
+
   ionViewWillEnter() {
+    console.log('Entrando a Home, cerrando menú');
     this.menu.close(); // Cierra el menú al entrar en la vista
   }
 

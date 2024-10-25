@@ -1,0 +1,41 @@
+<ion-menu side="end" menuId="main-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item (click)="navigateTo('/perfil')">
+      <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-item>
+
+    <ion-item (click)="navigateTo('/asistencia')">
+      <ion-icon name="id-card-outline" slot="start"></ion-icon>
+      <ion-label>Asistencia</ion-label>
+    </ion-item>
+
+    <ion-item (click)="navigateTo('/registrar-asistencia')">
+      <ion-icon name="qr-code-outline" slot="start"></ion-icon>
+      <ion-label>Registrar asistencia</ion-label>
+    </ion-item>
+
+    <div class="ion-text-center" style="position: absolute; bottom: 16px; left: 0; right: 0;">
+      <ion-button (click)="cerrarSesion()" shape="round">
+        Cerrar Sesión
+      </ion-button>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content" [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Bienvenida</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Aquí puedes añadir el contenido principal de tu página -->
+</ion-content>
