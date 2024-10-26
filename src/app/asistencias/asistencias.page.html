@@ -1,0 +1,42 @@
+<ion-content id="main-content" fullscreen="true" color="light">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button> <!-- Botón de retroceso -->
+      </ion-buttons>
+      <ion-title>Asistencia</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Verificar si asistenciasAgrupadas tiene registros -->
+  <div *ngIf="Object.keys(asistenciasAgrupadas).length === 0" class="ion-text-center">
+
+    <ion-card style="border-radius: 20px; box-shadow: none; background: transparent;">
+      <ion-card-content>
+       <ion-img src="assets/icon/sinRegistros.png" style="max-width: 300px; margin: 20px auto;"></ion-img>
+         <p style="margin: 20px 0;">No se encontraron registros de asistencia.</p>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <!-- Mostrar las asistencias si existen -->
+  <div *ngFor="let seccion of Object.keys(asistenciasAgrupadas)" class="asistencia-card">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ asistenciasAgrupadas[seccion].ramo }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngFor="let asistencia of asistenciasAgrupadas[seccion].asistencias">
+          Fecha: {{ asistencia.fecha }} <br>
+          Asistió: {{ asistencia.asistio ? 'Sí' : 'No' }}
+          <ion-divider></ion-divider> <!-- El divisor entre cada fecha -->
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

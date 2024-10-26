@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseAuthentication, User } from '@capacitor-firebase/authentication';
 import { FirebaseFirestore } from '@capacitor-firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,43 @@ export class LoginService {
   });
 
   constructor() {
+
+    this.getUsuario();
     // Dejamos un escucha al evento de cambio de estado de firebase
     // cuando firebase inicie la primera vez, este evento se llamará cuando este cargado
     FirebaseAuthentication.addListener('authStateChange', async (cambio) => {
+      if (cambio.user) {
+        await this.setUsuario(cambio.user);
+      } else {
+        await this.removeUsuario();
+      }
       this.usuarioActual.next(cambio.user!);
       this.nombreUsuario = cambio.user?.email ?? '';
       // cuando llamemos este metodo, firebase ya estará cargado y el guard lo sabrá
       this.cargarFirebase();
     });
+  }
+
+  private async setUsuario(user: User) {
+    await Preferences.set({
+      key: 'usuario',
+      value: JSON.stringify(user),
+    });
+  }
+
+  private async getUsuario() {
+    const { value } = await Preferences.get({ key: 'usuario' });
+    if (value) {
+      const user: User = JSON.parse(value);
+      this.usuarioActual.next(user);
+      this.nombreUsuario = user.email ?? '';
+    }
+  }
+
+  private async removeUsuario() {
+    await Preferences.remove({ key: 'usuario' });
+    this.usuarioActual.next(undefined);
+    this.nombreUsuario = '';
   }
 
   public async guardarDatosUsuario(datos: { nombreAlumno: string, modalidad: string, telefono: string, carrera: string }) {

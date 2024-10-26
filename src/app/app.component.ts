@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { initializeApp } from 'firebase/app';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { initializeApp } from 'firebase/app';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private loginService: LoginService) {
+
+  }
 
   async ngOnInit() {
     //veremos si no estamos en un celular
