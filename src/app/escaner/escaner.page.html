@@ -4,7 +4,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button> <!-- Botón de retroceso -->
       </ion-buttons>
-      <ion-title>Registrar Asistencia</ion-title>
+      <ion-title size="large" class="ion-text-center">Registrar Asistencia</ion-title>
       <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
       </ion-buttons>
@@ -17,7 +17,7 @@
 
 <div class="ion-text-center" style="padding: 0 20px;">
   <p style="margin: 20px 0;">Para registrar tu asistencia, haz clic en el botón "Escanear" y escanea el código QR que te presenta tu profesor.</p>
-  <ion-button shape="round" (click)="escanear()">Escanear Qr</ion-button>
+  <ion-button shape="round" (click)="escanear()" class="custom-button">Escanear Qr</ion-button>
 </div>
 
 

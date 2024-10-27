@@ -1,6 +1,7 @@
 <ion-header translucent="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+
+      <ion-title size="large" class="ion-text-center">Login</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -33,13 +34,13 @@
         <br>
 
         <ion-input [(ngModel)]="pass" type="password" label="Contraseña" placeholder="Contraseña" mode="md"
-          fill="outline" labelPlacement="floating" errorText="Este campo es requerido">
+          fill="outline" labelPlacement="floating" errorText="Este campo es requerido" class="password-input">
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
         <br>
 
         <div class="ion-text-center">
-          <ion-button (click)="ingresar()" shape="round">
+          <ion-button (click)="ingresar()" shape="round" class="custom-button">
             Ingresar
           </ion-button>
         </div>
@@ -86,7 +87,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-item lines="none">
-        <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
+        <ion-icon name="information-circle" slot="start" color="warning"></ion-icon>
         <ion-label>
           Te enviaremos un email a tu correo para que puedas reestablecer tu contraseña
         </ion-label>
@@ -96,7 +97,7 @@
         placeholder="Email" fill="outline" mode="md" labelPlacement="floating"></ion-input>
       <br>
       <div class="ion-text-center">
-        <ion-button shape="round" (click)="enviarCorreo()">
+        <ion-button shape="round" (click)="enviarCorreo()" class="custom-button">
           Enviar correo
         </ion-button>
       </div>

@@ -10,8 +10,17 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   constructor(private loginService: LoginService) {
+    this.initializeApp();
 
   }
+  initializeApp() {
+    const prefersDark = localStorage.getItem('darkMode') === 'true';
+    if (prefersDark) {
+      document.body.classList.add('dark');
+    }
+  }
+
+
 
   async ngOnInit() {
     //veremos si no estamos en un celular
@@ -31,4 +40,7 @@ export class AppComponent {
       console.log('Firebase web initialized');
     }
 }
+
+
+
 }

@@ -1,17 +1,44 @@
-
-
 <ion-content id="main-content" [fullscreen]="true">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Bienvenida</ion-title>
+      <ion-title size="large" class="ion-text-center">Home</ion-title>
       <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
+  <div class="bienvenida-container">
+    <h1>Bienvenido(a)</h1>
+    <h2>{{ nombreAlumno }}</h2>
+  </div>
+
+  <!-- Carrusel de información importante -->
+  <ion-slides pager="true" class="slides-container">
+    <ion-slide>
+
+      <h3 style="margin: 0 20px;">Tu Asistencia General</h3>
+      <p style="margin: 0 15px;" class="instruction-text">Haz clic en cada segmento del gráfico para ver el porcentaje de asistencia por materia.</p>
+      <div class="chart-wrapper">
+        <canvas id="attendanceChart"></canvas>
+      </div>
+    </ion-slide>
+     <br><br>
 
 
-  <h1>Bienvenido, {{ nombreAlumno }}</h1>
-  <br>
+    <ion-slide>
+      <h3 style="margin: 0 20px;">Frase Motivacional</h3>
+      <p class="motivational-text" style="animation: fadeIn 1s ease-in-out forwards;">{{ obtenerFraseMotivacional() }}</p>
+      <p style="margin: 0 15px;" class="instruction-text">Recuerda siempre asistir a tus clases, cada esfuerzo cuenta.</p>
+    </ion-slide>
+     <br><br>
+
+    <ion-slide>
+      <h3 style="margin: 0 20px;">Calendario</h3>
+      <p class="instruction-text">Puedes seleccionar una fecha para revisar tus próximas actividades.</p>
+       <div class="datetime-wrapper">
+        <ion-datetime presentation="date" [showDefaultButtons]="true"></ion-datetime>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

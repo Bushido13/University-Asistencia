@@ -6,7 +6,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button> <!-- Botón de retroceso -->
       </ion-buttons>
-      <ion-title>Perfil</ion-title>
+      <ion-title size="large" class="ion-text-center">Perfil</ion-title>
       <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
       </ion-buttons>
@@ -61,7 +61,7 @@
         </ion-label>
       </ion-item>
 
-      <ion-button shape="round" [disabled]="perfilForm.invalid" (click)="actualizarPerfil()">
+      <ion-button shape="round" [disabled]="perfilForm.invalid" (click)="actualizarPerfil()" class="custom-button">
         Actualizar Perfil
       </ion-button>
 

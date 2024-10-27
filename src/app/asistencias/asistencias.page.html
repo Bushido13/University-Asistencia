@@ -4,7 +4,7 @@
       <ion-buttons slot="start">
         <ion-back-button defaultHref="/home"></ion-back-button> <!-- Botón de retroceso -->
       </ion-buttons>
-      <ion-title>Asistencia</ion-title>
+      <ion-title size="large" class="ion-text-center">Asistencia</ion-title>
       <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
       </ion-buttons>
@@ -13,30 +13,32 @@
 
   <!-- Verificar si asistenciasAgrupadas tiene registros -->
   <div *ngIf="Object.keys(asistenciasAgrupadas).length === 0" class="ion-text-center">
-
     <ion-card style="border-radius: 20px; box-shadow: none; background: transparent;">
       <ion-card-content>
-       <ion-img src="assets/icon/sinRegistros.png" style="max-width: 300px; margin: 20px auto;"></ion-img>
-         <p style="margin: 20px 0;">No se encontraron registros de asistencia.</p>
-
+        <ion-img src="assets/icon/sinRegistros.png" style="max-width: 300px; margin: 20px auto;"></ion-img>
+        <p style="margin: 20px 0;">No se encontraron registros de asistencia.</p>
       </ion-card-content>
     </ion-card>
   </div>
-
 
   <!-- Mostrar las asistencias si existen -->
-  <div *ngFor="let seccion of Object.keys(asistenciasAgrupadas)" class="asistencia-card">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{ asistenciasAgrupadas[seccion].ramo }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let seccion of Object.keys(asistenciasAgrupadas)">
+      <ion-item slot="header" color="light">
+        <ion-label>{{ asistenciasAgrupadas[seccion].ramo }}</ion-label>
+      </ion-item>
+      <div slot="content">
         <div *ngFor="let asistencia of asistenciasAgrupadas[seccion].asistencias">
-          Fecha: {{ asistencia.fecha }} <br>
-          Asistió: {{ asistencia.asistio ? 'Sí' : 'No' }}
-          <ion-divider></ion-divider> <!-- El divisor entre cada fecha -->
+          <ion-card style="border-radius: 15px; box-shadow: none; background: #f4f4f4; margin-bottom: 10px;">
+            <ion-card-content>
+              Fecha: {{ asistencia.fecha }} <br>
+              Asistió: {{ asistencia.asistio ? 'Sí' : 'No' }}
+            </ion-card-content>
+          </ion-card>
         </div>
-      </ion-card-content>
-    </ion-card>
-  </div>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
 </ion-content>
+

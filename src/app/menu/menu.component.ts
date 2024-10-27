@@ -45,4 +45,12 @@ export class MenuComponent implements OnInit {
       this.menu.close(); // Cierra el menú
     }
   }
+
+  toggleDarkMode(event: any) {
+    if (event.detail.checked) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }
 }

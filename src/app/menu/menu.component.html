@@ -27,8 +27,13 @@
       <ion-label>Registrar asistencia</ion-label>
     </ion-item>
 
+    <ion-item lines="none">
+      <ion-label>Modo Oscuro</ion-label>
+      <ion-toggle (ionChange)="toggleDarkMode($event)"></ion-toggle>
+    </ion-item>
+
     <div class="ion-text-center" style="position: absolute; bottom: 16px; left: 0; right: 0;">
-      <ion-button (click)="cerrarSesion()" shape="round">
+      <ion-button (click)="cerrarSesion()" shape="round" class="custom-button">
         Cerrar Sesión
       </ion-button>
     </div>

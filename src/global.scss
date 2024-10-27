@@ -60,7 +60,149 @@
   font-family: "SUSE", sans-serif;
 }
 
-ion-title {
-  font-family: "SUSE", sans-serif;
-  font-weight: bold;
+#main-content ion-header {
+  ion-toolbar {
+    background-color: orange !important; // Forzar el color de fondo naranja
+  }
+
+  ion-title {
+    color: gray !important; // Forzar el color de las letras a gris
+  }
+
+  ion-menu-button {
+    color: gray !important; // Forzar el color del ícono del botón de menú a gris
+  }
 }
+
+.ion-color-secondary {
+  --ion-color-base: #aa7901 !important;
+}
+
+.button-native {
+  color: darkslategray;
+  background: #e9b700;
+}
+
+.tool-container {
+background: orange !important;;
+
+}
+
+.custom-button {
+  --background: orange;    // Color de fondo del botón
+  --color: rgb(106, 100, 100);          // Color del texto del botón
+
+  &:hover {
+    --background: darkorange; // Color al pasar el mouse sobre el botón (opcional)
+  }
+}
+
+.password-input ion-input-password-toggle .button-inner {
+  slot[name="icon-only"] {
+    color: orange; // Cambia el color del ícono del toggle a naranja
+  }
+
+  slot[name="end"] {
+    color: orange; // Asegura que el ícono en la posición final también sea naranja
+  }
+
+  &:hover {
+    color: gray; // Cambia el color al pasar el mouse sobre el ícono
+  }
+}
+
+body.dark {
+  --ion-background-color: #575757; // Fondo oscuro para el cuerpo
+  --ion-text-color: #e39a12; // Texto en color amarillo para contraste
+
+  ion-toolbar {
+    --background: #575757; // Fondo oscuro del toolbar
+    --color: #e39a12; // Texto amarillo del toolbar
+  }
+
+  ion-content {
+    --background: #575757; // Fondo oscuro para el contenido principal
+  }
+
+  ion-item {
+    --background: #575757; // Fondo oscuro para items
+    --color: #e39a12; // Texto amarillo para items
+  }
+
+  ion-button {
+    --background: #575757; // Fondo oscuro para botones
+    --color: #e39a12; // Texto amarillo para botones
+  }
+
+  ion-title {
+    color: #e39a12 !important; // Forzar el color de las letras a amarillo
+  }
+
+  ion-menu-button {
+    color: #e39a12 !important; // Forzar el color del ícono del botón de menú a amarillo
+  }
+
+  .custom-button {
+    --background: rgb(106, 100, 100); // Color de fondo del botón en modo oscuro
+    --color: orange; // Color del texto del botón
+
+    &:hover {
+      --background: darkorange; // Color al pasar el mouse sobre el botón (opcional)
+    }
+  }
+
+  ion-datetime {
+    --background: #575757; // Cambia el fondo del calendario al modo oscuro
+    --color: #f0a243; // Color del texto del calendario
+  }
+
+  .inner-scroll {
+    background-color: #575757 !important; // Asegura que el fondo interno también sea oscuro
+  }
+
+  // Estilos para scroll específico
+  ::part(scroll) {
+    background: #575757 !important; // Cambiar el fondo de la parte scroll si aplica
+  }
+
+  ion-accordion-group {
+    ion-item {
+      --background: #3a3a3a !important; // Fondo gris oscuro del encabezado del acordeón
+      --color: #e9b700 !important; // Texto amarillo para mejor visibilidad
+    }
+  }
+
+  ion-accordion {
+    div[slot="content"] {
+      background-color: #3a3a3a !important; // Fondo gris oscuro para el contenido desplegable
+      color: #ffffff !important; // Texto blanco para buen contraste
+    }
+  }
+
+  ion-item.button-native {
+    --background: #3a3a3a !important; // Fondo gris oscuro del botón nativo
+    --color: #e9b700 !important; // Texto amarillo del botón
+  }
+
+  ion-item::after {
+    background-color: #3a3a3a !important; // Elimina cualquier efecto de fondo azul que aparezca en el pseudo-elemento
+  }
+
+  ion-card {
+    --background: #3a3a3a !important; // Fondo gris oscuro del ion-card
+    --color: #101010 !important; // Texto en negro para contraste
+    border-radius: 15px;
+    box-shadow: none;
+    margin-bottom: 10px;
+  }
+}
+
+
+
+
+  // Puedes añadir más estilos según las necesidades de tu aplicación
+
+
+
+
+
