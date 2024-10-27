@@ -49,7 +49,7 @@ export class AsistenciaService {
 
         console.log("Datos que se enviarán a Firestore:", dataToSend);
 
-        // Usando setDocument para crear o actualizar el documento
+
         await FirebaseFirestore.setDocument({
           reference: `asistencias/${datosQR.seccion}/fechas/${fechaFormateada}/usuarios/${userId}`,
           data: dataToSend,
@@ -94,7 +94,7 @@ export class AsistenciaService {
         });
 
         if (!snapshots || snapshots.length === 0) {
-          // Si no hay resultados, retornar un objeto vacío
+
           return {};
         }
 

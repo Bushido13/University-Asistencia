@@ -39,7 +39,7 @@
     }
 
     ionViewWillEnter() {
-      this.menu.close(); // Cierra el menú al entrar en la vista
+      this.menu.close();
     }
 
 
@@ -51,13 +51,13 @@
     async loadProfileData() {
       const data = await this.perfilService.getProfileData();
       if (data) {
-        this.originalProfileData = { ...data }; // Guardar datos originales
-        // Carga los datos en el formulario
+        this.originalProfileData = { ...data };
+
         this.perfilForm.patchValue({
-          nombreAlumno: data['nombre'], // Acceso correcto a la propiedad
-          telefono: data['telefono'], // Acceso correcto a la propiedad
-          carrera: data['carrera'], // Acceso correcto a la propiedad
-          modalidad: data['modalidad'], // Acceso correcto a la propiedad
+          nombreAlumno: data['nombre'],
+          telefono: data['telefono'],
+          carrera: data['carrera'],
+          modalidad: data['modalidad'],
         });
       }
     }
@@ -85,7 +85,7 @@
 
 
 
-    // Método para confirmar y eliminar la cuenta
+
     async confirmarEliminacionCuenta() {
       const confirmed = await this.interactionService.presentAlert(
         'Eliminar cuenta',
@@ -98,16 +98,16 @@
       }
     }
 
-    // Método para eliminar la cuenta
+
     async deleteAccount() {
       this.interactionService.showLoading('Eliminando cuenta...');
       try {
-        // Elimina la cuenta de Firebase Auth
+
         await this.loginService.eliminarCuenta();
-        // Elimina el perfil del usuario en Firestore
+
         await this.perfilService.deleteProfileData();
         this.interactionService.showToast('Cuenta eliminada con éxito');
-        // Redirige al usuario a la pantalla de inicio de sesión o cualquier otra acción posterior
+
         this.navController.navigateRoot('/login');
       } catch (error) {
         this.interactionService.showToast('Error al eliminar la cuenta');

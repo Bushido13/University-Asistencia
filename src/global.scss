@@ -61,7 +61,7 @@
 }
 
 #main-content ion-header {
-  ion-toolbar {
+  ion-toolbar-content {
     background-color: orange !important; // Forzar el color de fondo naranja
   }
 
@@ -89,29 +89,31 @@ background: orange !important;;
 }
 
 .custom-button {
-  --background: orange;    // Color de fondo del botón
-  --color: rgb(106, 100, 100);          // Color del texto del botón
+  --background: orange;
+  --color: rgb(106, 100, 100);
 
   &:hover {
-    --background: darkorange; // Color al pasar el mouse sobre el botón (opcional)
+    --background: darkorange;
   }
 }
 
 .password-input ion-input-password-toggle .button-inner {
   slot[name="icon-only"] {
-    color: orange; // Cambia el color del ícono del toggle a naranja
+    color: orange;
   }
 
   slot[name="end"] {
-    color: orange; // Asegura que el ícono en la posición final también sea naranja
+    color: orange;
   }
 
   &:hover {
-    color: gray; // Cambia el color al pasar el mouse sobre el ícono
+    color: gray;
   }
 }
 
 body.dark {
+
+
   --ion-background-color: #575757;
   --ion-text-color: #e39a12;
 
@@ -122,40 +124,40 @@ body.dark {
 
 
   ion-item {
-    --background: #575757; // Fondo oscuro para items
-    --color: #e39a12; // Texto amarillo para items
+    --background: #575757;
+    --color: #e39a12;
   }
 
   ion-button {
-    --background: #575757; // Fondo oscuro para botones
-    --color: #e39a12; // Texto amarillo para botones
+    --background: #575757;
+    --color: #e39a12;
   }
 
   ion-title {
-    color: #e39a12 !important; // Forzar el color de las letras a amarillo
+    color: #e39a12 !important;
   }
 
 
 
   .custom-button {
-    --background: rgb(106, 100, 100); // Color de fondo del botón en modo oscuro
-    --color: #e39a12; // Color del texto del botón
+    --background: rgb(106, 100, 100);
+    --color: #e39a12;
 
 
   }
 
   ion-datetime {
-    --background: #575757; // Cambia el fondo del calendario al modo oscuro
-    --color: #f0a243; // Color del texto del calendario
+    --background: #575757;
+    --color: #f0a243;
   }
 
   .inner-scroll {
-    background-color: #575757 !important; // Asegura que el fondo interno también sea oscuro
+    background-color: #575757 !important;
   }
 
   // Estilos para scroll específico
   ::part(scroll) {
-    background: #575757 !important; // Cambiar el fondo de la parte scroll si aplica
+    background: #575757 !important;
   }
 
 
@@ -167,8 +169,8 @@ body.dark {
 
 
   ion-card {
-    --background: #3a3a3a !important; // Fondo gris oscuro del ion-card
-    --color: #101010 !important; // Texto en negro para contraste
+    --background: #3a3a3a !important;
+    --color: #101010 !important;
     border-radius: 15px;
     box-shadow: none;
     margin-bottom: 10px;
@@ -187,8 +189,6 @@ ion-accordion ion-card-content {
 
 
 
-
-  // Puedes añadir más estilos según las necesidades de tu aplicación
 
 
 

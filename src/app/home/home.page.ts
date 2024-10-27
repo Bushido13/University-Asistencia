@@ -57,7 +57,6 @@ export class HomePage implements OnInit {
       return;
     }
 
-    // Cambiar las etiquetas a nombres de ramos completos
     const labels = Object.keys(asistencias).map((key) => {
       return this.asistenciaService.ramosPorSeccion[key] || key; // Utilizar el nombre del ramo
     });
@@ -95,12 +94,13 @@ export class HomePage implements OnInit {
             legend: {
               position: 'top',
               labels: {
-                color: document.body.classList.contains('dark') ? '#FFFFFF' : '#000000' // Color de las etiquetas
+                color: '#e39a12' // Color naranja para los títulos de los ramos
               }
             },
             tooltip: {
-              backgroundColor: document.body.classList.contains('dark') ? '#575757' : '#FFFFFF', // Fondo del tooltip
-              titleColor: document.body.classList.contains('dark') ? '#FFFFFF' : '#000000', // Color del texto del tooltip
+              backgroundColor: '#575757', // Fondo del tooltip siempre gris
+              titleColor: '#FFFFFF', // Color del título del tooltip siempre blanco
+              bodyColor: '#FFFFFF', // Color del texto del cuerpo del tooltip siempre blanco
             },
           },
           layout: {
@@ -113,9 +113,10 @@ export class HomePage implements OnInit {
 
 
 
+
   ionViewWillEnter() {
     console.log('Entrando a Home, cerrando menú');
-    this.menu.close(); // Cierra el menú al entrar en la vista
+    this.menu.close();
   }
 
   async cargarDatosPerfil() {

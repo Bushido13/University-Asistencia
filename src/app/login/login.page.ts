@@ -25,12 +25,12 @@ export class LoginPage implements OnInit {
 
   }
 
-  //ocurre cuando se va a entrar a esta vista, antes de la animación
+
   ionViewWillEnter(): void {
 
   }
 
-  //se ejecuta cuando ya se entró a la vista, despues de las animaciones
+
   async ionViewDidEnter() {
     this.usuario = '';
     this.pass = '';
@@ -60,21 +60,21 @@ export class LoginPage implements OnInit {
 
   async enviarCorreo() {
     if (!this.email) {
-      // Mostrar mensaje si el campo está vacío
+
       this.interactionService.showToast('Por favor, ingresa un correo válido', 3000, 'top');
       return;
     }
 
     try {
-      // Usar FirebaseAuthentication para enviar el correo de restablecimiento
+
       await FirebaseAuthentication.sendPasswordResetEmail({ email: this.email });
       this.interactionService.showToast('Correo de restablecimiento enviado', 3000, 'top');
-      this.email = ''; // Borrar el email del input
-      this.cerrarModal(); // Cierra el modal después de enviar el correo
+      this.email = '';
+      this.cerrarModal();
     } catch (error) {
       console.error('Error al enviar correo:', error);
       this.interactionService.showToast('Error al enviar el correo. Inténtalo de nuevo', 3000, 'top');
-      this.email = ''; // Borrar el email del input en caso de error también
+      this.email = '';
     }
   }
 

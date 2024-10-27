@@ -13,9 +13,9 @@ export class NoAuthGuard implements CanActivate {
     await this.loginService.firebaseCargado;
 
     if (!this.loginService.logeado) {
-      return true; // El usuario no está autenticado, puede ver login y registro
+      return true;
     } else {
-      // Si está autenticado, redirige al home
+
       this.router.navigate(['/home']);
       return false;
     }

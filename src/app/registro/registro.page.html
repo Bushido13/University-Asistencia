@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title size="large" class="ion-text-center">Registrarse</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -19,7 +19,7 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="11" size-md="8" size-xl="6">
 
-        <!-- Vinculando el formulario al FormGroup -->
+
         <form [formGroup]="datosForm" (ngSubmit)="registrarse()">
           <br>
           <ion-input
@@ -60,7 +60,7 @@
           </ion-input>
           <br>
 
-          <!-- Nombre del Alumno -->
+
   <ion-input
     type="text"
     placeholder="Nombre del Alumno"
@@ -72,14 +72,14 @@
   </ion-input>
   <br>
 
-  <!-- Modalidad (vespertino o diurno) -->
+
   <ion-select placeholder="Modalidad" formControlName="modalidad">
     <ion-select-option value="vespertino">Vespertino</ion-select-option>
     <ion-select-option value="diurno">Diurno</ion-select-option>
   </ion-select>
   <br>
 
-  <!-- Teléfono -->
+
   <ion-input
     type="tel"
     placeholder="Teléfono"
@@ -91,7 +91,7 @@
   </ion-input>
   <br>
 
-  <!-- Carrera -->
+
   <ion-input
     type="text"
     placeholder="Carrera"

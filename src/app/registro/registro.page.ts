@@ -19,14 +19,14 @@ export class RegistroPage implements OnInit {
   perfilSrv = inject(PerfilService);
 
   constructor(private fb: FormBuilder) {
-    // Inicializar el FormGroup en el constructor
+    // validamos los datos en FormGroup en el constructor
     this.datosForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Validar email
-      password: ['', [Validators.required, Validators.minLength(6)]],  // Validar password
-      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],  // Confirmación de contraseña
-      nombreAlumno: ['', Validators.required],  // Validar nombre
-      modalidad: ['', Validators.required],  // Validar modalidad (vespertino o diurno)
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],  // Validar teléfono
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirm: ['', [Validators.required, Validators.minLength(6)]],
+      nombreAlumno: ['', Validators.required],
+      modalidad: ['', Validators.required],
+      telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       carrera: ['', Validators.required],
     });
   }
@@ -37,7 +37,7 @@ export class RegistroPage implements OnInit {
     if (this.datosForm.valid) {
       const { email, password, nombreAlumno, modalidad, telefono, carrera } = this.datosForm.value;
 
-      // Validar que no haya campos undefined
+      // Validar que no haya campos indefinidos
       if (!nombreAlumno || !modalidad || !telefono || !carrera) {
         console.error('Faltan datos del perfil');
         return await this.interactionSrv.showToast('Por favor completa todos los campos');

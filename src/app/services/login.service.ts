@@ -81,7 +81,7 @@ export class LoginService {
     return this.usuarioActual.value ? true : false;
   }
 
-  // propiedad del usuario actual
+  // usuario actual
   public get usuario() {
     return this.usuarioActual.value;
   }
@@ -109,8 +109,8 @@ export class LoginService {
   // Método para cerrar sesión
   public async logout() {
     await FirebaseAuthentication.signOut();
-    this.usuarioActual.next(undefined); // Limpia el usuario actual
-    this.nombreUsuario = ''; // Limpia el nombre de usuario
+    this.usuarioActual.next(undefined);
+    this.nombreUsuario = '';
     console.log('Usuario cerrado de sesión');
   }
 
@@ -118,11 +118,11 @@ export class LoginService {
     const user = this.usuario;
     if (user) {
       try {
-        await FirebaseAuthentication.deleteUser();  // Eliminar la cuenta de Firebase Auth
+        await FirebaseAuthentication.deleteUser();
         await FirebaseFirestore.deleteDocument({
-          reference: `profiles/${user.uid}`,  // Eliminar los datos del Firestore
+          reference: `profiles/${user.uid}`,
         });
-        this.usuarioActual.next(undefined); // Limpiar el usuario actual
+        this.usuarioActual.next(undefined);
         console.log('Cuenta eliminada correctamente');
       } catch (error) {
         console.error('Error al eliminar la cuenta:', error);

@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
     private loginService: LoginService,
     private navController: NavController,
     private menu: MenuController,
-    private router: Router, // Inyectar Router
+    private router: Router,
   ) {}
 
   ngOnInit() {}
@@ -29,20 +29,20 @@ export class MenuComponent implements OnInit {
     );
 
     if (confirmacion) {
-      await this.loginService.logout();  // Cerrar sesión
+      await this.loginService.logout();
       await this.interactionService.showToast('Sesión cerrada correctamente');
-      this.navController.navigateRoot('/login');  // Redirigir a la página de login
+      this.navController.navigateRoot('/login');
     }
     this.menu.close();
   }
 
   navigateTo(route: string) {
-    // Verifica si la ruta actual es la misma que la seleccionada
+
     if (this.router.url === route) {
-      this.menu.close(); // Cierra el menú
+      this.menu.close();
     } else {
-      this.router.navigate([route]); // Navega a la ruta seleccionada
-      this.menu.close(); // Cierra el menú
+      this.router.navigate([route]);
+      this.menu.close();
     }
   }
 
