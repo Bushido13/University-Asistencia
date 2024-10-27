@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
     }, 0);
   }
 
+
   obtenerFraseMotivacional() {
     // Elegir una frase aleatoria
     this.fraseMotivacional = this.frasesMotivacionales[
@@ -81,14 +82,10 @@ export class HomePage implements OnInit {
           datasets: [
             {
               data,
-              backgroundColor: [
-                '#36A2EB',
-                '#FF6384',
-                '#4BC0C0',
-                '#FFCE56',
-                '#9966FF',
-                '#FF9F40',
-              ],
+              backgroundColor: document.body.classList.contains('dark')
+                ? ['#4444FF', '#FF4444', '#44FF44', '#FFFF44', '#8844FF', '#FF8844'] // Colores en modo oscuro
+                : ['#36A2EB', '#FF6384', '#4BC0C0', '#FFCE56', '#9966FF', '#FF9F40'], // Colores en modo claro
+              borderColor: 'transparent', // Sin bordes alrededor de los segmentos
             },
           ],
         },
@@ -97,12 +94,23 @@ export class HomePage implements OnInit {
           plugins: {
             legend: {
               position: 'top',
+              labels: {
+                color: document.body.classList.contains('dark') ? '#FFFFFF' : '#000000' // Color de las etiquetas
+              }
             },
+            tooltip: {
+              backgroundColor: document.body.classList.contains('dark') ? '#575757' : '#FFFFFF', // Fondo del tooltip
+              titleColor: document.body.classList.contains('dark') ? '#FFFFFF' : '#000000', // Color del texto del tooltip
+            },
+          },
+          layout: {
+            padding: 10,
           },
         },
       });
     }
   }
+
 
 
   ionViewWillEnter() {

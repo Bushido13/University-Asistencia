@@ -75,7 +75,7 @@
 }
 
 .ion-color-secondary {
-  --ion-color-base: #aa7901 !important;
+  --ion-color-base: #e9b700 !important;
 }
 
 .button-native {
@@ -112,17 +112,14 @@ background: orange !important;;
 }
 
 body.dark {
-  --ion-background-color: #575757; // Fondo oscuro para el cuerpo
-  --ion-text-color: #e39a12; // Texto en color amarillo para contraste
+  --ion-background-color: #575757;
+  --ion-text-color: #e39a12;
 
-  ion-toolbar {
-    --background: #575757; // Fondo oscuro del toolbar
-    --color: #e39a12; // Texto amarillo del toolbar
+  .ion-color-secondary {
+    --ion-color-base: #fcfcfc !important;
   }
 
-  ion-content {
-    --background: #575757; // Fondo oscuro para el contenido principal
-  }
+
 
   ion-item {
     --background: #575757; // Fondo oscuro para items
@@ -138,17 +135,13 @@ body.dark {
     color: #e39a12 !important; // Forzar el color de las letras a amarillo
   }
 
-  ion-menu-button {
-    color: #e39a12 !important; // Forzar el color del ícono del botón de menú a amarillo
-  }
+
 
   .custom-button {
     --background: rgb(106, 100, 100); // Color de fondo del botón en modo oscuro
-    --color: orange; // Color del texto del botón
+    --color: #e39a12; // Color del texto del botón
 
-    &:hover {
-      --background: darkorange; // Color al pasar el mouse sobre el botón (opcional)
-    }
+
   }
 
   ion-datetime {
@@ -165,28 +158,13 @@ body.dark {
     background: #575757 !important; // Cambiar el fondo de la parte scroll si aplica
   }
 
-  ion-accordion-group {
-    ion-item {
-      --background: #3a3a3a !important; // Fondo gris oscuro del encabezado del acordeón
-      --color: #e9b700 !important; // Texto amarillo para mejor visibilidad
-    }
-  }
 
-  ion-accordion {
-    div[slot="content"] {
-      background-color: #3a3a3a !important; // Fondo gris oscuro para el contenido desplegable
-      color: #ffffff !important; // Texto blanco para buen contraste
-    }
-  }
 
-  ion-item.button-native {
-    --background: #3a3a3a !important; // Fondo gris oscuro del botón nativo
-    --color: #e9b700 !important; // Texto amarillo del botón
-  }
 
-  ion-item::after {
-    background-color: #3a3a3a !important; // Elimina cualquier efecto de fondo azul que aparezca en el pseudo-elemento
-  }
+
+
+
+
 
   ion-card {
     --background: #3a3a3a !important; // Fondo gris oscuro del ion-card
@@ -195,6 +173,16 @@ body.dark {
     box-shadow: none;
     margin-bottom: 10px;
   }
+
+  .ion-color-light {
+    --ion-color-base: #737373 !important;
+
+}
+
+ion-accordion ion-card-content {
+  background-color: #737373;
+  color: #e9b700;
+}
 }
 
 
