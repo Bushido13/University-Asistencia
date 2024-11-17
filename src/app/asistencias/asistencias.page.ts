@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AsistenciaService } from '../services/asistencia.service';
+import { AsistenciasAgrupadas } from '../models/asistencia.model';
 
 @Component({
   selector: 'app-asistencias',
@@ -9,11 +10,15 @@ import { AsistenciaService } from '../services/asistencia.service';
 export class AsistenciasPage implements OnInit {
 
   Object = Object;
-  asistenciasAgrupadas: any = {};
+  asistenciasAgrupadas: AsistenciasAgrupadas = {};
 
   constructor(private asistenciaService: AsistenciaService) { }
 
   async ngOnInit() {
-    this.asistenciasAgrupadas = await this.asistenciaService.getAsistenciasUsuarioAgrupadas();
+    try {
+      this.asistenciasAgrupadas = await this.asistenciaService.getAsistenciasUsuarioAgrupadas();
+    } catch (error) {
+      console.error("Error al cargar asistencias:", error);
+    }
   }
 }
