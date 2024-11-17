@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   interactionSrv = inject(InteractionService);
   perfilSrv = inject(PerfilService);
   asistenciaService = inject(AsistenciaService);
+
   nombreAlumno: string | null = null;
   frasesMotivacionales = [
     '¡Sigue así, tu dedicación te llevará lejos!',
@@ -25,6 +26,7 @@ export class HomePage implements OnInit {
     '¡Vas por buen camino, sigue asistiendo!',
   ];
   fraseMotivacional: string = '';
+  private attendanceChart: Chart<'doughnut', number[], string> | null = null;
 
   constructor(private menu: MenuController) {
     // Registrar los elementos y controladores que necesitamos
@@ -33,22 +35,26 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     this.cargarDatosPerfil();
-    const asistencias = await this.asistenciaService.getAsistenciasUsuarioAgrupadas();
-    this.loadAttendanceChart(asistencias);
-    this.menu.close();
+    this.recargarGraficoAsistencias();
 
-    // Utiliza setTimeout para evitar ExpressionChangedAfterItHasBeenCheckedError
     setTimeout(() => {
       this.obtenerFraseMotivacional();
     }, 0);
   }
 
-
   obtenerFraseMotivacional() {
-    // Elegir una frase aleatoria
     this.fraseMotivacional = this.frasesMotivacionales[
       Math.floor(Math.random() * this.frasesMotivacionales.length)
     ];
+  }
+
+  async recargarGraficoAsistencias() {
+    try {
+      const asistencias = await this.asistenciaService.getAsistenciasUsuarioAgrupadas();
+      this.loadAttendanceChart(asistencias);
+    } catch (error) {
+      console.error('Error al recargar el gráfico de asistencias:', error);
+    }
   }
 
   loadAttendanceChart(asistencias: any) {
@@ -58,23 +64,25 @@ export class HomePage implements OnInit {
     }
 
     const labels = Object.keys(asistencias).map((key) => {
-      return this.asistenciaService.ramosPorSeccion[key] || key; // Utilizar el nombre del ramo
+      return this.asistenciaService.ramosPorSeccion[key] || key;
     });
 
     const data = Object.keys(asistencias).map((label) => {
       const asistenciasTotales = asistencias[label].asistencias.length;
-      const asistenciasPresentes = asistencias[label].asistencias.filter(
-        (a: any) => a.asistio
-      ).length;
+      const asistenciasPresentes = asistencias[label].asistencias.filter((a: any) => a.asistio).length;
       return Math.round((asistenciasPresentes / asistenciasTotales) * 100);
     });
 
-    const ctx = (document.getElementById('attendanceChart') as HTMLCanvasElement).getContext(
-      '2d'
-    );
+    const ctx = (document.getElementById('attendanceChart') as HTMLCanvasElement).getContext('2d');
 
     if (ctx) {
-      new Chart(ctx, {
+      // Destruir el gráfico anterior si existe
+      if (this.attendanceChart) {
+        this.attendanceChart.destroy();
+      }
+
+      // Crear un nuevo gráfico
+      this.attendanceChart = new Chart<'doughnut', number[], string>(ctx, {
         type: 'doughnut',
         data: {
           labels,
@@ -82,9 +90,9 @@ export class HomePage implements OnInit {
             {
               data,
               backgroundColor: document.body.classList.contains('dark')
-                ? ['#4444FF', '#FF4444', '#44FF44', '#FFFF44', '#8844FF', '#FF8844'] // Colores en modo oscuro
-                : ['#36A2EB', '#FF6384', '#4BC0C0', '#FFCE56', '#9966FF', '#FF9F40'], // Colores en modo claro
-              borderColor: 'transparent', // Sin bordes alrededor de los segmentos
+                ? ['#4444FF', '#FF4444', '#44FF44', '#FFFF44', '#8844FF', '#FF8844']
+                : ['#36A2EB', '#FF6384', '#4BC0C0', '#FFCE56', '#9966FF', '#FF9F40'],
+              borderColor: 'transparent',
             },
           ],
         },
@@ -94,13 +102,13 @@ export class HomePage implements OnInit {
             legend: {
               position: 'top',
               labels: {
-                color: '#e39a12' // Color naranja para los títulos de los ramos
-              }
+                color: '#e39a12',
+              },
             },
             tooltip: {
-              backgroundColor: '#575757', // Fondo del tooltip siempre gris
-              titleColor: '#FFFFFF', // Color del título del tooltip siempre blanco
-              bodyColor: '#FFFFFF', // Color del texto del cuerpo del tooltip siempre blanco
+              backgroundColor: '#575757',
+              titleColor: '#FFFFFF',
+              bodyColor: '#FFFFFF',
             },
           },
           layout: {
@@ -111,18 +119,16 @@ export class HomePage implements OnInit {
     }
   }
 
-
-
-
   ionViewWillEnter() {
     console.log('Entrando a Home, cerrando menú');
     this.menu.close();
+    this.recargarGraficoAsistencias();
   }
 
   async cargarDatosPerfil() {
-    const perfilData = await this.perfilSrv.getProfileData(); // Obtén los datos del perfil
+    const perfilData = await this.perfilSrv.getProfileData();
     if (perfilData) {
-      this.nombreAlumno = perfilData['nombre']; // Asigna el nombre del alumno a la variable
+      this.nombreAlumno = perfilData['nombre'];
     }
   }
 
@@ -135,9 +141,9 @@ export class HomePage implements OnInit {
     );
 
     if (confirmacion) {
-      await this.loginSrv.logout(); // Cerrar sesión
+      await this.loginSrv.logout();
       await this.interactionSrv.showToast('Sesión cerrada correctamente');
-      this.navController.navigateRoot('/login'); // Redirigir a la página de login
+      this.navController.navigateRoot('/login');
     }
   }
 }
