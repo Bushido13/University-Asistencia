@@ -60,23 +60,22 @@ export class LoginPage implements OnInit {
 
   async enviarCorreo() {
     if (!this.email) {
-
       this.interactionService.showToast('Por favor, ingresa un correo válido', 3000, 'top');
       return;
     }
 
     try {
-
+      console.log('Llamando a sendPasswordResetEmail'); // Esto debería imprimirse
       await FirebaseAuthentication.sendPasswordResetEmail({ email: this.email });
-      this.interactionService.showToast('Correo de restablecimiento enviado', 3000, 'top');
-      this.email = '';
-      this.cerrarModal();
+      console.log('Correo de restablecimiento enviado'); // Esto debería imprimirse si la llamada es exitosa
+      await this.interactionService.showToast('Correo de restablecimiento enviado', 3000, 'top');
     } catch (error) {
-      console.error('Error al enviar correo:', error);
+      console.error('Error al enviar correo:', error); // Esto debería imprimirse si hay un error
       this.interactionService.showToast('Error al enviar el correo. Inténtalo de nuevo', 3000, 'top');
-      this.email = '';
     }
   }
+
+
 
 
 
