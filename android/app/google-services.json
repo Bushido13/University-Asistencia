@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247638577400",
+    "project_id": "university-asistencia",
+    "storage_bucket": "university-asistencia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247638577400:android:407785a847b72f5b232b0d",
+        "android_client_info": {
+          "package_name": "cl.duoc.UniversityAsistencia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU-hRq-WT_kFgfxU8nSM2_wK2_0FCC5Dg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
